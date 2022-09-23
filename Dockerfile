@@ -21,6 +21,12 @@ WORKDIR /mediapipe
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Special Config in fucking China
+RUN apt-get update && apt-get install -y ca-certificates
+RUN sed -i "s@http://.*archive.ubuntu.com@https://mirrors.ustc.edu.cn/@g" /etc/apt/sources.list && \
+sed -i "s@http://.*security.ubuntu.com@https://mirrors.ustc.edu.cn/@g" /etc/apt/sources.list
+# RUN sed -i "s@deb@deb [trusted=yes]@g" /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         gcc-8 g++-8 \
