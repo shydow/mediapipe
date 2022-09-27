@@ -20,6 +20,7 @@ WORKDIR /io
 WORKDIR /mediapipe
 
 ENV DEBIAN_FRONTEND=noninteractive
+VOLUME /Resource
 
 # Special Config in fucking China
 RUN apt-get update && apt-get install -y ca-certificates
@@ -78,3 +79,8 @@ COPY . /mediapipe/
 
 # If we want the docker image to contain the pre-built object_detection_offline_demo binary, do the following
 # RUN bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/demo:object_detection_tensorflow_demo
+
+# autoflip build
+RUN bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/autoflip:run_autoflip
+
+
